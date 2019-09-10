@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <script src="cordova.js"></script>
+    <style>
+        .bg {
+
+            background-color: RGB(255, 160, 122, 0.3);
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            overflow: scroll;
+            height: 690px;
+        }
+
+        .img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50px;
+            height: 50px;
+
+        }
+
+        .quick {
+            float: left;
+        }
+
+        .clearfix {
+            overflow: auto;
+        }
+
+        .div {
+            margin: 3px;
+            padding: 10px;
+            width: 380px;
+            height: 75px;
+            text-align: right;
+            font-size: 40px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <ons-page>
+        <ons-toolbar style="background-color:	LightCoral">
+
+
+
+
+            <img class="list-item__thumbnail" src="D:\Project\project\รูป\tooth8.png">
+
+
+            <div style="margin-left: 80%">
+                <img class="list-item__thumbnail" onclick="chatbot()" src="D:\Project\project\รูป\conversation.png">
+            </div>
+        </ons-toolbar>
+
+
+
+        <ons-page>
+
+            <div class="bg">
+                <div style="height: 100px; padding: 1px 0 0 0;">
+                    <div class="card" onclick="qq()">
+                        <ons-row>
+                            <div class="card__title" style="margin-left: 40px">หมายเลขคิวของคุณ</div>
+                            <ons-col>
+                                <div class="card__title" style="margin-left: 50px">รออีก(คิว)</div>
+                            </ons-col>
+                        </ons-row>
+
+                        <ons-row>
+                            <img width="60" height="60" src="D:\Project\project\รูป\tooth1.png" >
+                            <ons-col>
+                                <div class="clearfix" style="margin-left: 35px; border-right: 1px solid #999;">
+                                    <p style="margin-top: 10px; font-size: 30px;">A007</p>
+
+                                </div>
+                            </ons-col>
+                            <ons-col>
+                                <div class="card__title" style="margin-left: 75px; margin-top: 10px; font-size: 30px;">6
+                                </div>
+                            </ons-col>
+                        </ons-row>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <hr>
+
+
+
+                <p style="text-align: center; margin-top: 10px;">
+
+                    วันนี้รับบริการแบบไหนดีคะ ?</p>
+                <br>
+
+                <ons-row>
+                    <ons-col style="background:white;">
+
+                        <div class="clearfix">
+                            <img class="quick" src="D:\Project\project\รูป\hand-gesture.png" alt="Pineapple" width="140"
+                                height="100" onclick="selectq()">
+                            <div class="div">จองคิว</div>
+                        </div>
+
+
+
+
+                    </ons-col>
+                </ons-row>
+                <br>
+                <br>
+                <ons-row style="height:120px" vertical-align="center">
+                    <ons-col
+                        style="background:white; border-radius: 15px; display: block; margin-left: auto;margin-right: auto;"
+                        width="40" height="40">
+
+                        <p>
+                            <div>
+
+                                <img class="img" onclick="calendar()" src="D:\Project\project\รูป\calendar.png">
+                            </div>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            ปฏิทินหมอ
+                        </p>
+                    </ons-col>
+                    <br>
+                    <ons-col
+                        style="background:white;  border-radius: 15px; display: block; margin-left: auto;margin-right: auto;"
+                        width="40" height="40">
+                        <p>
+                            <div>
+                                <img class="img" onclick="history()" src="D:\Project\project\รูป\dental-care.png">
+                            </div>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            ประวัติการรักษา
+                        </p>
+                    </ons-col>
+                </ons-row>
+                <br>
+                <ons-row style="height:120px" vertical-align="center">
+                    <ons-col
+                        style="background:white; border-radius: 15px; display: block; margin-left: auto;margin-right: auto;"
+                        width="40" height="40"">
+              <p>
+                <div>
+                  <img class=" img" onclick="dating()" src="D:\Project\project\รูป\dental.png">
+            </div>
+            </p>
+            <p style="text-align: center; margin: 10px;">
+                ใบนัดหมอ
+            </p>
+            </ons-col>
+            <ons-col
+                style="background:white; border-radius: 15px; display: block; margin-left: auto;margin-right: auto;"
+                width="40" height="40">
+                <p>
+                    <div>
+                        <img class="img" onclick="signout()" src="D:\Project\project\รูป\log-out.png">
+                    </div>
+                </p>
+                <p style="text-align: center; margin: 10px;">
+                    ออกจากระบบ
+                </p>
+            </ons-col>
+            </ons-row>
+
+        </ons-page>
+
+
+</body>
+<script>
+    function chatbot() {
+        window.location.href = 'chatbot.html'
+    }
+    function selectq() {
+        window.location.href = 'selectq.html'
+    }
+
+    function calendar() {
+        window.location.href = 'calendar.html'
+    }
+    function history() {
+        window.location.href = 'history.html'
+    }
+    function dating() {
+        window.location.href = 'dating.html'
+    }
+    function signout() {
+        window.location.href = 'signout.html'
+    }
+    function qq() {
+        window.location.href = 'qq.html'
+    }
+</script>
+
+</html>

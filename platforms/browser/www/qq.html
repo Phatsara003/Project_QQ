@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <script src="cordova.js"></script>
+</head>
+<style>
+    .bg {
+        background-color: RGB(255, 160, 122, 0.3);
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        overflow: scroll;
+        height: 645px;
+    }
+
+    .bg1 {
+        background-color: RGB(219, 112, 147, 0.4);
+        display: block;
+        height: 310px;
+
+    }
+
+    .text {
+
+        text-indent: 18px;
+        width: 380px;
+        height: 75px;
+        font-size: 30px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .text1 {
+        text-indent: 18px;
+        text-align: center;
+        width: 380px;
+        height: 75px;
+        font-size: 125px;
+        color: RGB(0, 0, 0, 0.6);
+        font-weight: bold;
+    }
+
+    .quick {
+        float: left;
+        width: 90;
+        height: 95;
+        margin: 5px;
+    }
+
+    .quick1 {
+        float: left;
+        width: 25px;
+        height: 25px;
+        margin: 5px;
+    }
+
+    .clearfix {
+        overflow: auto;
+    }
+
+    .img {
+        width: 25px;
+        height: 25px;
+
+    }
+</style>
+
+<body>
+
+    <ons-page>
+        <ons-toolbar style="background-color:	LightCoral">
+
+            <div class="left">
+                <ons-icon size="45px" onclick="index()" icon="angle-left">
+                </ons-icon>
+            </div>
+        </ons-toolbar>
+        <ons-page>
+            <div class="bg">
+                <div class="bg1">
+                    <div class="clearfix">
+                        <img class="quick" src="D:\Project\project\รูป\brackets.png">
+                        <br><br><br>
+                        <div class="text">เทียนทัตนคลินิก</div>
+
+                    </div>
+
+                    <div class="text1">A007</div> <br><br><br>
+
+                    <ons-row>
+                        <ons-col>
+                            <div class="clearfix">
+
+                                <img class="quick1" src="D:\Project\project\รูป\tooth7.png"> <br>
+                                <div style="color: white">07 ก.พ. 62</div>
+
+                            </div>
+
+
+
+                        </ons-col>
+                        <ons-col>
+
+                            <div class="clearfix" style="margin-left: 90px">
+
+                                <img class="quick1" src="D:\Project\project\รูป\medical.png"> <br>
+                                <div style="color: white">11:09:34</div>
+
+                            </div>
+
+
+                        </ons-col>
+                    </ons-row>
+
+                    <p style="text-align: center; margin-top: 10px; color: RGB(0, 0, 0, 0.8); font-size: 18px">
+
+                        เหลืออีก</p>
+                    <br>
+                    <div class="progress-bar progress-bar--material progress-bar--indeterminate">
+                    </div>
+                    <br><br>
+                    <div style="text-indent: 18px; text-align: center; font-size: 90px;color: RGB(0, 0, 0, 0.6);
+                            font-weight: bold;">6 คิว</div>
+                    <br><br>
+                    <br>
+                    <div style="border-bottom:#999999 1.5px dotted;"></div><br>
+                    <p style="text-align: center; margin-top: 5px; color: RGB(0, 0, 0, 0.8); font-size: 18px" onclick="cancle()">ยกเลิกคิว</p>
+                </div>
+
+            </div>
+            </div>
+            <ons-button style="background: SALMON;" modifier="large" onclick="confirm()">จองคิว</ons-button>
+            </div>
+        </ons-page>
+
+
+
+
+
+
+</body>
+<script>
+    function index() {
+        window.location.href = 'index.html'
+    }
+    function confirm() {
+        window.location.href = 'confirm.html'
+    }
+    function cancle() {
+        window.location.href = 'cancle.html'
+    }
+</script>
+
+</html>
