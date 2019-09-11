@@ -12,30 +12,20 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- date Bootstarp ui -->
-    <meta charset="utf-8">
+    <!-- <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" /> -->
 
 
 
  <!-- script Date jquery ui -->
-    <!-- <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"rel = "stylesheet">
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"rel = "stylesheet">
     <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> -->
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
 
-
-    <!-- 
-    <script>
-        function getDate(){
-            var date= document.getElementById("datepicker").value; 
-            alert(date);
-        }
-
-        
-    </script> -->
 
 </head>
 <style>
@@ -120,16 +110,13 @@
                         <body>
                             <br>
                             <input id="datepicker" width="250">
-                            <!-- <input type="button" id="btn-date" role="button" onclick="getDate()" value="ok" /> -->
-                            <script>
+   
+                           <script>
                                 var today = new Date();
-
                                 $('#datepicker').datepicker({
-                                    // dateFormat:"DD,dd/mm/yy", // แสดงวันด้วย DD คือวันอะไร จ-ศ 
-                                    format: "dd/mm/yyyy",
+                                    dateFormat:"DD,dd/mm/yy", // แสดงวันด้วย DD คือวันอะไร จ-ศ 
+                                    // format: "dd/mm/yyyy",
                                     minDate: today,
-
-
                                 });
 
 
