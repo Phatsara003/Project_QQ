@@ -96,11 +96,11 @@
                         <p>กรุณาเลือกเวลา</p>
                     </div>
                     <div class="container">
-                       
+
 
                         <body>
-                           
-                            <select id="time" class="mdb-select md-form">
+
+                            <!-- <select id="time" class="mdb-select md-form">
                                 <option value="" disabled selected>เลือก</option>
                                 <option value="9:45-10:30" >9:00-9:45</option>
                                 <option value="9:45-10:30" >9:45-10:30</option>
@@ -113,25 +113,73 @@
                                 <option value="16:00-16:45" >16:00-16:45</option>
                                 <option value="16:45-17:30" >16:45-17:30</option>
                               </select>
-                            
-                             
+                             <select id="time" class="mdb-select md-form">
+                                <option value="" disabled selected>เลือก</option>
+                                <option value="17:00-17:45" >17:00-17:45</option>
+                                <option value="17:45-18:30" >17:45-18:30</option>
+                                <option value="18:30-19:15" >18:30-19:15</option>
+                                <option value="19:15-20:00" >19:15-20:00</option>
+                             </select>   -->
+
+                            <script>
+                                var html = "";
+                                var day = localStorage.getItem("day")
+                                if (day == "Sun" || day == "Sat") {
+                                    document.write("<select id='time' class='mdb-select md-form'>");
+                                   document.write("<option value='' disabled selected>เลือก</option>");
+                                   document.write("<option value='9:00-9:45' >9:00-9:45</option>"); 
+                                   document.write("<option value='9:45-10:30' >9:45-10:30</option>"); 
+                                   document.write("<option value='10:30-11:15' >10:30-11:15</option>");
+                                   document.write("<option value='11:15-12:00' >11:15-12:00</option>");
+                                   document.write("<option value='13:00-13:45' >13:00-13:45</option>");
+                                   document.write("<option value='13:45-14:30' >13:45-14:30</option>");
+                                   document.write("<option value='14:30-15:15' >14:30-15:15</option>");
+                                   document.write("<option value='15:15-16:00' >15:15-16:00</option>");
+                                   document.write("<option value='16:00-16:45' >16:00-16:45</option>");
+                                   document.write("<option value='16:45-17:30' >16:45-17:30</option>");
+                                   document.write("</select>");     
+                                        
+                                        
+                                       
+                                   
+                                       
+                                        
+                              
+                                } else {
+
+                                    document.write("<select id='time' class='mdb-select md-form'>");
+                                   document.write("<option value='' disabled selected>เลือก</option>");
+                                   document.write("<option value='17:00-17:45' >17:00-17:45</option>"); 
+                                   document.write("<option value='17:45-18:30' >17:45-18:30</option>"); 
+                                   document.write("<option value='18:30-19:15' >18:30-19:15</option>");
+                                   document.write("<option value='19:15-20:00' >19:15-20:00</option>");
+                                   document.write("</select>"); 
+                                  
+
+                                }
+
+
+
+                            </script>
+
                         </body>
                         <script>
                             function getTime() {
                                 var time_1 = document.getElementById("time").value;
-                               
-                                
-                                var time= localStorage.setItem('time',time_1)
-                               var getLocalTime = localStorage.getItem("time");
-                               console.log("LocalTime::"+ getLocalTime);
+
+
+                                var time = localStorage.setItem('time', time_1)
+                                var getLocalTime = localStorage.getItem("time");
+                                console.log("LocalTime::" + getLocalTime);
                             }
-                            
+
                         </script>
 
                     </div>
                     <br>
                     <form>
-                        <a href="selectq.html"  class="btn btn-outline-secondary" onclick="getTime()" role="button">ถัดไป</a>
+                        <a href="selectq.html" class="btn btn-outline-secondary" onclick="getTime()"
+                            role="button">ถัดไป</a>
                     </form>
                 </div>
             </div>

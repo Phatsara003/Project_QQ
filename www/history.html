@@ -72,7 +72,7 @@
                         <img class="quick" src="D:\Project\project\รูป\brackets.png">
                         <br><br>
                         <div class="div">เทียนทัตนคลินิก</div>
-                        
+
                         <p>ประวัติการรักษาของฉัน</p>
                         <b id="nameSh"></b>
 
@@ -82,16 +82,16 @@
                         <ons-col style="background:white; border-radius: 10px; display: block; margin: 10px;">
 
                             <div class="clearfix">
-                               <p><img class="quick" src="D:\Project\project\รูป\health-report.png" width="50"
-                                    height="50">
-                                <b id="history"></b></p>
+                                <p><img class="quick" src="D:\Project\project\รูป\health-report.png" width="50"
+                                        height="50">
+                                    <b id="history"></b></p>
 
-                               
+
 
                         </ons-col>
                     </ons-row>
-                   
-                    
+
+
                 </div>
             </div>
         </ons-page>
@@ -102,7 +102,7 @@
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://localhost:8080/historyii",
+        "url": "http://localhost:8080/history",
         "method": "GET",
         "headers": {
             "cache-control": "no-cache",
@@ -113,11 +113,13 @@
     var settings1 = {
         "async": true,
         "crossDomain": true,
-        "url": "http://localhost:8080/Admin/"+index,
+        "url": "http://localhost:8080/customer/" ,
         "method": "GET",
         "headers": {
+            "Content-Type": "application/x-www-form-urlencoded",
             "cache-control": "no-cache",
-            "Postman-Token": "8b1e6897-60c3-48a2-bc32-810a3697e00a"
+            "Postman-Token": "38f54e83-aa31-4deb-906d-1d3c13377f52"
+        
         }
     }
 
@@ -125,18 +127,19 @@
         console.log(response);
         let loop = response.data;
         // console.log(loop.length);
-        $("#history").html("ประเภท : "+loop[0].Types+'<br>'+"รายละเอียด : "+loop[0].Detail+'<br>'+"วันที่ : "+loop[0].Date);
+        $("#history").html("ประเภท : " + loop[0].Type + '<br>' + "รายละเอียด : " + loop[0].Detail + '<br>' + "วันที่ : " + loop[0].Date);
     });
     $.ajax(settings1).done(function (response) {
         console.log(response);
         let loop = response.data;
         // console.log(loop.length);
-        $("#nameSh").html("คุณ : "+loop[0].Fname);
+        $("#nameSh").html("คุณ : " + loop[0].Fname);
     });
 </script>
 <script>
-        function index() {
-                window.location.href = 'index.html'
-            }
-        </script>
+    function index() {
+        window.location.href = 'index.html'
+    }
+</script>
+
 </html>

@@ -110,15 +110,15 @@
                         <body>
                             <br>
                             <input id="datepicker" width="250">
-   
+                            
                            <script>
                                 var today = new Date();
                                 $('#datepicker').datepicker({
-                                    dateFormat:"DD,dd/mm/yy", // แสดงวันด้วย DD คือวันอะไร จ-ศ 
+                                    dateFormat:"D,dd/mm/yy", // แสดงวันด้วย DD คือวันอะไร จ-ศ 
                                     // format: "dd/mm/yyyy",
                                     minDate: today,
                                 });
-
+                           
 
                             </script>
 
@@ -130,11 +130,15 @@
                         <script>
                             function getDate() {
                                 var date = document.getElementById("datepicker").value;
-                                // alert(date);
-                                console.log("date ::" + date);
+                                var day = date.substring(0,3);
 
+
+                                console.log("date ::" + date);
+                                // console.log("day ::" + day);
                                 var date = localStorage.setItem('date', date)
                                 var getLocalDate = localStorage.getItem("date");
+                                var day = localStorage.setItem('day', day)
+                                var getLocalDay = localStorage.getItem("day");
                                 console.log("LocalDate::" + getLocalDate);
 
                             }
