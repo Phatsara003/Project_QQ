@@ -57,18 +57,18 @@
 
 
 
-            <img class="list-item__thumbnail" src="D:\Project\project\รูป\tooth8.png">
+            <img class="list-item__thumbnail" src="img/tooth8.png">
 
 
             <div style="margin-left: 80%">
-                <img class="list-item__thumbnail" onclick="chatbot()" src="D:\Project\project\รูป\conversation.png">
+                <img class="list-item__thumbnail" onclick="chatbot()" src="img/conversation.png">
             </div>
         </ons-toolbar>
 
         <ons-page>
             <div class="bg">
                 <p>
-                    <img width="80" height="80" src="D:\Project\project\รูป\tooth1.png">
+                    <img width="80" height="80" src="img/tooth1.png">
                     <b id="nameSh"></b></p>
 
 
@@ -83,7 +83,7 @@
                     <ons-col style="background:white;">
 
                         <div class="clearfix">
-                            <img class="quick" src="D:\Project\project\รูป\hand-gesture.png" alt="Pineapple" width="140"
+                            <img class="quick" src="img/hand-gesture.png" alt="Pineapple" width="140"
                                 height="100" onclick="selectdatetime()">
                             <div class="div">จองคิว</div>
                         </div>
@@ -103,7 +103,7 @@
                         <p>
                             <div>
 
-                                <img class="img" onclick="calendar()" src="D:\Project\project\รูป\calendar.png">
+                                <img class="img" onclick="calendar()" src="img/calendar.png">
                             </div>
                         </p>
                         <p style="text-align: center; margin: 10px;">
@@ -116,7 +116,7 @@
                         width="40" height="40">
                         <p>
                             <div>
-                                <img class="img" onclick="history()" src="D:\Project\project\รูป\dental-care.png">
+                                <img class="img" onclick="history()" src="img/dental-care.png">
                             </div>
                         </p>
                         <p style="text-align: center; margin: 10px;">
@@ -131,7 +131,7 @@
                         width="40" height="40">
                         <p>
                             <div>
-                                <img class=" img" onclick="dating()" src="D:\Project\project\รูป\dental.png">
+                                <img class=" img" onclick="dating()" src="img/dental.png">
                             </div>
                         </p>
                         <p style="text-align: center; margin: 10px;">
@@ -143,7 +143,7 @@
                         width="40" height="40">
                         <p>
                             <div>
-                                <img class="img" onclick="signout()" src="D:\Project\project\รูป\log-out.png">
+                                <img class="img" onclick="signout()" src="img/log-out.png">
                             </div>
                         </p>
                         <p style="text-align: center; margin: 10px;">
@@ -186,13 +186,14 @@
             if ( i< loopBookq.length  ) {
              console.log(" Loop_BookId : "+i+"::"+ loopBookq[i].BookID );
             }
-          var j = i;
+          var x = i;
         }
-
-            var last_bookId = localStorage.setItem('last_BookID', loopBookq[j].BookID)
+            var last_bookId = localStorage.setItem('last_BookID', loopBookq[x].BookID)
                             var getLocal_Last_BookID = localStorage.getItem("last_BookID");
                             console.log("Local_Last_BookID::" + getLocal_Last_BookID);
         
+
+
     });
     var settings = {
         "async": true,

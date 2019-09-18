@@ -22,7 +22,7 @@
         border-radius: 30px;
         display: block;
         margin: 15px;
-        height: 660px;
+        height: auto;
 
     }
 
@@ -69,27 +69,20 @@
             <div class="bg">
                 <div class="bg1">
                     <div class="clearfix">
-                        <img class="quick" src="D:\Project\project\รูป\brackets.png">
+                        <img class="quick" src="img/brackets.png">
                         <br><br>
                         <div class="div">เทียนทัตนคลินิก</div>
 
                         <p>ประวัติการรักษาของฉัน</p>
-                        <b id="nameSh"></b>
+                        <center>
+                            <b id="namehis"></b>
+                        </center>
+
 
                     </div>
-                    <hr>
-                    <ons-row>
-                        <ons-col style="background:white; border-radius: 10px; display: block; margin: 10px;">
-
-                            <div class="clearfix">
-                                <p><img class="quick" src="D:\Project\project\รูป\health-report.png" width="50"
-                                        height="50">
-                                    <b id="history"></b></p>
-
-
-
-                        </ons-col>
-                    </ons-row>
+                    <hr>  
+                   <div id="show"></div>
+                   
 
 
                 </div>
@@ -98,28 +91,17 @@
 </body>
 
 <script>
+   
     var index = localStorage.getItem("Index");
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://localhost:8080/history",
-        "method": "GET",
-        "headers": {
-            "cache-control": "no-cache",
-            "Postman-Token": "814c4bd9-8918-4afc-926d-ccf95c54b68a"
-        }
-    }
-
-    var settings1 = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://localhost:8080/customer/" ,
+        "url": "http://localhost:8080/bookq",
         "method": "GET",
         "headers": {
             "Content-Type": "application/x-www-form-urlencoded",
             "cache-control": "no-cache",
-            "Postman-Token": "38f54e83-aa31-4deb-906d-1d3c13377f52"
-        
+            "Postman-Token": "245e85de-d347-4c15-9061-ffe63ea8c51c"
         }
     }
 
@@ -127,14 +109,61 @@
         console.log(response);
         let loop = response.data;
         // console.log(loop.length);
-        $("#history").html("ประเภท : " + loop[0].Type + '<br>' + "รายละเอียด : " + loop[0].Detail + '<br>' + "วันที่ : " + loop[0].Date);
+        var html ="";
+        for (let j = 0; j < loop.length; j++) {
+
+            if (getItemCus == loop[j].CusID) {
+                console.log(" Loop_Fname 1: " + loop[j].BookID);
+
+                    $('#show').append(
+                        '<ons-row >'+
+                       '<ons-col style="background:white; border-radius: 10px; display: block; margin: 10px;">'+
+                            '<div id="displaybox"></div>'+
+                            '<div class="clearfix">'+
+                                '<p><img class="quick" src="img/health-report.png" width="50"'+
+                                        'height="50">'+
+                                     "ประเภท : " + loop[j].Type + '<br>' + "รายละเอียด : " + loop[j].Detail + '<br>' + "วันที่ : " + loop[j].Date+'</p>'+
+                            '</div>'+
+                        '</ons-col>'+
+                    '</ons-row>'
+                    )
+                               
+            }
+        }
+
     });
+
+
+    var settings1 = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://localhost:8080/customer",
+        "method": "GET",
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "cache-control": "no-cache",
+            "Postman-Token": "7ce21012-571f-46f2-b635-45e9610ecc35"
+        }
+    }
+    var getItemCus = localStorage.getItem("Index");
+    console.log(getItemCus);
     $.ajax(settings1).done(function (response) {
         console.log(response);
-        let loop = response.data;
-        // console.log(loop.length);
-        $("#nameSh").html("คุณ : " + loop[0].Fname);
+        let loopCus = response.data;
+
+        for (let i = 0; i < loopCus.length; i++) {
+
+            console.log(" Loop_Fname 1: " + loopCus[i].Fname);
+
+            if (getItemCus == loopCus[i].CusID) {
+
+                $("#namehis").html("คุณ   " + loopCus[i].Fname);
+                console.log("indexHis: " + getItemCus);
+                console.log("Fname 1: " + loopCus[i].Fname);
+            }
+        }
     });
+
 </script>
 <script>
     function index() {
