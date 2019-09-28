@@ -2,13 +2,14 @@
 <html lang="en">
 
 <head>
+
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    
-    <script src="cordova.js"></script>
+
+    <!-- <script src="cordova.js"></script> -->
 
     <style>
         .bg {
@@ -50,28 +51,25 @@
 </head>
 
 <body>
-
     <ons-page>
         <ons-toolbar style="background-color:	LightCoral">
 
 
 
 
-            <img class="list-item__thumbnail" src="D:\Project\project\รูป\tooth8.png">
+            <img class="list-item__thumbnail" src="img/tooth8.png">
 
 
             <div style="margin-left: 80%">
-                <img class="list-item__thumbnail" onclick="chatbot()" src="D:\Project\project\รูป\conversation.png">
+                <img class="list-item__thumbnail" onclick="chatbot()" src="img/conversation.png">
             </div>
         </ons-toolbar>
-
-
 
         <ons-page>
             <div class="bg">
                 <p>
-                    <img width="80" height="80" src="D:\Project\project\รูป\tooth1.png">
-                    <b>สวัสดีค่ะ </b> คุณ Gong yoo</p>
+                    <img width="80" height="80" src="img/tooth1.png">
+                    <b id="nameSh"></b></p>
 
 
                 <hr>
@@ -85,8 +83,8 @@
                     <ons-col style="background:white;">
 
                         <div class="clearfix">
-                            <img class="quick" src="D:\Project\project\รูป\hand-gesture.png" alt="Pineapple" width="140"
-                                height="100" onclick="selectq()">
+                            <img class="quick" src="img/hand-gesture.png" alt="Pineapple" width="140"
+                                height="100" onclick="selectdatetime()">
                             <div class="div">จองคิว</div>
                         </div>
 
@@ -105,7 +103,7 @@
                         <p>
                             <div>
 
-                                <img class="img" onclick="calendar()" src="D:\Project\project\รูป\calendar.png">
+                                <img class="img" onclick="calendar()" src="img/calendar.png">
                             </div>
                         </p>
                         <p style="text-align: center; margin: 10px;">
@@ -118,7 +116,7 @@
                         width="40" height="40">
                         <p>
                             <div>
-                                <img class="img" onclick="history()" src="D:\Project\project\รูป\dental-care.png">
+                                <img class="img" onclick="history()" src="img/dental-care.png">
                             </div>
                         </p>
                         <p style="text-align: center; margin: 10px;">
@@ -130,40 +128,119 @@
                 <ons-row style="height:120px" vertical-align="center">
                     <ons-col
                         style="background:white; border-radius: 15px; display: block; margin-left: auto;margin-right: auto;"
-                        width="40" height="40"">
-              <p>
-                <div>
-                  <img class=" img" onclick="dating()" src="D:\Project\project\รูป\dental.png">
-            </div>
-            </p>
-            <p style="text-align: center; margin: 10px;">
-                ใบนัดหมอ
-            </p>
-            </ons-col>
-            <ons-col
-                style="background:white; border-radius: 15px; display: block; margin-left: auto;margin-right: auto;"
-                width="40" height="40">
-                <p>
-                    <div>
-                        <img class="img" onclick="signout()" src="D:\Project\project\รูป\log-out.png">
-                    </div>
-                </p>
-                <p style="text-align: center; margin: 10px;">
-                    ออกจากระบบ
-                </p>
-            </ons-col>
-            </ons-row>
+                        width="40" height="40">
+                        <p>
+                            <div>
+                                <img class=" img" onclick="dating()" src="img/dental.png">
+                            </div>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            ใบนัดหมอ
+                        </p>
+                    </ons-col>
+                    <ons-col
+                        style="background:white; border-radius: 15px; display: block; margin-left: auto;margin-right: auto;"
+                        width="40" height="40">
+                        <p>
+                            <div>
+                                <img class="img" onclick="signout()" src="img/log-out.png">
+                            </div>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            ออกจากระบบ
+                        </p>
+
+                    </ons-col>
+                </ons-row>
 
         </ons-page>
+        <div class="container">
+            <h2 class="my-4"></h2>
+            <div class="row" id="shop">
+            </div>
 
+        </div>
 
 </body>
+
+<script>
+    var index = localStorage.getItem("Index");
+
+    var settings1 = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://172.26.252.97:8080/bookq/",
+        "method": "GET",
+        "headers": {
+            "cache-control": "no-cache",
+            "Postman-Token": "4d85d90c-90d7-48a1-bac6-a19b0c736293"
+        }
+    }
+
+    $.ajax(settings1).done(function (response) {
+        let loopBookq = response.data;
+
+        console.log("loop bookID: " + loopBookq.length);
+        
+        for (let i = 0; i < loopBookq.length; i++) {
+            if ( i< loopBookq.length  ) {
+             //console.log(" Loop_BookId : "+i+"::"+ loopBookq[i].BookID );
+             console.log(" Loop_Date : " + loopBookq[i].Date + "::" + loopBookq[i].Time);
+                if ("date"==loopBookq[i].Date ) {
+                    console.log("testDate::"+loopBookq[i].Date+"::"+loopBookq[i].Time);
+                    
+                }
+            }
+          var x = i;
+        }
+            var last_bookId = localStorage.setItem('last_BookID', loopBookq[x].BookID)
+                            var getLocal_Last_BookID = localStorage.getItem("last_BookID");
+                            console.log("Local_Last_BookID::" + getLocal_Last_BookID);
+        
+
+
+    });
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://172.26.252.97:8080/customer/",
+        "method": "GET",
+        "headers": {
+            "cache-control": "no-cache",
+            "Postman-Token": "4d85d90c-90d7-48a1-bac6-a19b0c736293"
+        }
+    }
+
+    console.log("index : " + index);
+
+    $.ajax(settings).done(function (response) {
+        let loop = response.data;
+
+        console.log("loop : " + loop.length);
+
+        for (let i = 0; i < loop.length; i++) {
+
+            console.log(" Loop_Fname : " + loop[i].Fname);
+            
+            if (index == loop[i].CusID) {
+                $("#nameSh").html("สวัสดีค่ะ คุณ" + loop[i].Fname);
+                console.log("Fname : " + loop[i].Fname);
+            }
+        }
+
+
+
+    });
+</script>
+
+
+
 <script>
     function chatbot() {
         window.location.href = 'chatbot.html'
     }
-    function selectq() {
-        window.location.href = 'selectq.html'
+    function selectdatetime() {
+        window.location.href = 'selectdate.html'
     }
 
     function calendar() {
@@ -177,6 +254,7 @@
     }
     function signout() {
         window.location.href = 'signout.html'
+        localStorage.clear("index");
     }
 </script>
 

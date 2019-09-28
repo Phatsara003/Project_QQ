@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+        <div class="container">
+                <h1>User Information</h1>
+                <form class="" action="#" method="post">
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <p class="form-control-static" id="UID" placeholder=""></p>
+                  </div>
+        <script>
+            
+                //Create a Web Api url for getting a member info
+                var url = "http://localhost/project/api/index.php/";
+                console.log(url);
+                $.get(url, function (data, status) {
+                    console.log(data);
+                    $('#username').html(data.UID);
+                    console.log(data.UID);
+                    // $('#password').html(data.Password);
+                    // $('#fname').html(data.FirstName);
+                    // $('#lname').html(data.LastName);
+                    // $('#email').html(data.Email);
+                    // $('#tel').html(data.Tel);
+            
+                   
+                });     
+        </script>
+</body>
+</html>

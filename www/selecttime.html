@@ -100,57 +100,46 @@
 
                         <body>
 
-                            <!-- <select id="time" class="mdb-select md-form">
-                                <option value="" disabled selected>เลือก</option>
-                                <option value="9:45-10:30" >9:00-9:45</option>
-                                <option value="9:45-10:30" >9:45-10:30</option>
-                                <option value="10:30-11:15" >10:30-11:15</option>
-                                <option value="11:15-12:00" >11:15-12:00</option>
-                                <option value="13:00-13:45" >13:00-13:45</option>
-                                <option value="13:45-14:30" >13:45-14:30</option>
-                                <option value="14:30-15:15" >14:30-15:15</option>
-                                <option value="15:15-16:00" >15:15-16:00</option>
-                                <option value="16:00-16:45" >16:00-16:45</option>
-                                <option value="16:45-17:30" >16:45-17:30</option>
-                              </select>
-                             <select id="time" class="mdb-select md-form">
-                                <option value="" disabled selected>เลือก</option>
-                                <option value="17:00-17:45" >17:00-17:45</option>
-                                <option value="17:45-18:30" >17:45-18:30</option>
-                                <option value="18:30-19:15" >18:30-19:15</option>
-                                <option value="19:15-20:00" >19:15-20:00</option>
-                             </select>   -->
-
                             <script>
-                                var html = "";
+                            
+                                var arrTimeMF = ["17:00-17:45", "17:45-18:30", "18:30-19:15", "19:15-20:00"];
+                                var arrTimeSS = ["9:00-9:45", "9:45-10:30", "10:30-11:15", "11:15-12:00", "13:00-13:45", "14:30-15:15", "15:15-16:00", "16:00-16:45", "16:45-17:30"]
+
                                 var day = localStorage.getItem("day")
                                 if (day == "Sun" || day == "Sat") {
-                                   document.write("<select id='time' class='mdb-select md-form'>");
-                                   document.write("<option value='' disabled selected>เลือก</option>");
-                                   document.write("<option value='9:00-9:45' >9:00-9:45</option>"); 
-                                   document.write("<option value='9:45-10:30' >9:45-10:30</option>"); 
-                                   document.write("<option value='10:30-11:15' >10:30-11:15</option>");
-                                   document.write("<option value='11:15-12:00' >11:15-12:00</option>");
-                                   document.write("<option value='13:00-13:45' >13:00-13:45</option>");
-                                   document.write("<option value='13:45-14:30' >13:45-14:30</option>");
-                                   document.write("<option value='14:30-15:15' >14:30-15:15</option>");
-                                   document.write("<option value='15:15-16:00' >15:15-16:00</option>");
-                                   document.write("<option value='16:00-16:45' >16:00-16:45</option>");
-                                   document.write("<option value='16:45-17:30' >16:45-17:30</option>");
-                                   document.write("</select>");     
+
+                                    document.write("<select id='time' class='mdb-select md-form'>");
+                                    document.write("<option value='' disabled selected>เลือก</option>");
+                                    let forDeletion = ["9:00-9:45", "11:15-12:00"]
+
+                            
+                                    var filter = arrTimeSS.filter(function (value,index,arr) {
+                                        if(!forDeletion.includes(value)){
+                                                return value;             
+                                        }
+                                    })
+                                        console.log(filter)
                                         
+                                    
+                                    // !!! Read below about array.includes(...) support !!!
+                                    for (let n = 0; n < filter.length; n++) {
+                                        // console.log(arrTimeSS[n])
+                                        document.write("<option value="+filter[n]+">" + filter[n] + "</option>");
+                                    }
+
+                                    document.write("</select>");
 
                                 } else {
-
-                                   document.write("<select id='time' class='mdb-select md-form'>");
-                                   document.write("<option value='' disabled selected>เลือก</option>");
-                                   document.write("<option value='17:00-17:45' >17:00-17:45</option>"); 
-                                   document.write("<option value='17:45-18:30' >17:45-18:30</option>"); 
-                                   document.write("<option value='18:30-19:15' >18:30-19:15</option>");
-                                   document.write("<option value='19:15-20:00' >19:15-20:00</option>");
-                                   document.write("</select>"); 
-                                  
-
+                                    document.write("<select id='time' class='mdb-select md-form'>");
+                                    document.write("<option value='' disabled selected>เลือก</option>");
+                                    let forDeletion = ["19:15-20:00"]
+                                    arrTimeMF = arrTimeMF.filter(item => !forDeletion.includes(item))
+                                    // !!! Read below about array.includes(...) support !!!
+                                    for (let n = 0; n < arrTimeMF.length; n++) {
+                                        console.log(arrTimeMF[n])
+                                        document.write("<option value"+arrTimeMF[n]+">" + arrTimeMF[n] + "</option>");
+                                    }
+                                    document.write("</select>");
                                 }
 
 
@@ -159,9 +148,51 @@
 
                         </body>
                         <script>
+
+                            var index = localStorage.getItem("Index");
+                            var getLocalDate = localStorage.getItem("date");
+
+                            var settings1 = {
+                                "async": true,
+                                "crossDomain": true,
+                                "url": "http://172.26.252.97:8080/bookq/",
+                                "method": "GET",
+                                "headers": {
+                                    "cache-control": "no-cache",
+                                    "Postman-Token": "4d85d90c-90d7-48a1-bac6-a19b0c736293"
+                                }
+                            }
+
+                            $.ajax(settings1).done(function (response) {
+                                let loopBookq = response.data;
+
+                                console.log("loop bookID: " + loopBookq.length);
+
+                                for (let i = 0; i < loopBookq.length; i++) {
+                                    if (i < loopBookq.length) {
+                                        //console.log(" Loop_BookId : "+i+"::"+ loopBookq[i].BookID );
+
+                                        if (getLocalDate == loopBookq[i].start) {
+                                            console.log("testDate::" + loopBookq[i].start);
+                                            console.log("testTime:: " + i + "::" + loopBookq[i].Time);
+                                         
+                                         
+                                        }
+                                   
+                                    }
+
+                                    var x = i;
+                                }
+                         
+                                var last_bookId = localStorage.setItem('last_BookID', loopBookq[x].BookID)
+                                var getLocal_Last_BookID = localStorage.getItem("last_BookID");
+                                console.log("Local_Last_BookID::" + getLocal_Last_BookID);
+                            });
+
+
+
                             function getTime() {
                                 var time_1 = document.getElementById("time").value;
-
 
                                 var time = localStorage.setItem('time', time_1)
                                 var getLocalTime = localStorage.getItem("time");

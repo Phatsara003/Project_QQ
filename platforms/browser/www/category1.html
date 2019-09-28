@@ -2,10 +2,12 @@
 <html lang="en">
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
-    <script src="cordova.js"></script>
+    <!-- <script src="cordova.js"></script> -->
 </head>
 <style>
     .bg {
@@ -67,7 +69,7 @@
             <div class="bg">
                 <div class="bg1">
                     <div class="clearfix">
-                        <img class="quick" src="D:\Project\project\รูป\brackets.png">
+                        <img class="quick" src="img/brackets.png">
                         <br><br>
                         <div class="div">เทียนทัตนคลินิก</div>
 
@@ -75,27 +77,71 @@
                     <hr>
                     <br>
                     <br>
-                    <p style="text-align: center; margin-top: 10px;">
+                    <p style="text-align: center; margin-top: 10px;">เลือกใช้บริการ</p>
+                    <!-- <p  style="text-align: center; margin-top: 10px;" id="type" value="ทันตกรรมพื้นฐาน">ทันตกรรมพื้นฐาน</p> -->
+                    <input type="text" name="" id="type1" value="ทันตกรรมพื้นฐาน" disabled>
 
-                        เลือกใช้บริการทันตกรรมพื้นฐาน</p>
                     <br>
-                    <select class="select-input select-input--material" style="display: block;
+
+                    <select id="cate1" class="select-input select-input-material" style="display: block;
                           margin-left: auto;
                           margin-right: auto;">
-                        <option>ถอนฟัน</option>
-                        <option>อุดฟัน</option>
-                        <option>ผ่าฟันคุด</option>
-                        <option>ขูดหินปูน</option>
+                        <option value="ถอนฟัน">ถอนฟัน</option>
+                        <option value="อุดฟัน">อุดฟัน</option>
+                        <option value="ผ่าฟันคุด">ผ่าฟันคุด</option>
+                        <option value="ขูดหินปูน">ขูดหินปูน</option>
                     </select>
 
+
+
+
                 </div>
-                <ons-button style="background: SALMON;" modifier="large" onclick="qq()">จองคิว</ons-button>
+
+                <ons-button style="background: SALMON;" modifier="large" onclick="queue()">จองคิว</ons-button>
             </div>
         </ons-page>
 </body>
 <script>
     function qq() {
         window.location.href = 'qq.html'
+
+    }
+
+    function queue() {
+        var type_1 = document.getElementById("type1").value;
+        var type1 = localStorage.setItem('type1', type_1)
+
+        var cate_1 = document.getElementById("cate1").value;
+        var category = localStorage.setItem('category1', cate_1)
+
+        var status = localStorage.setItem('status', 1)
+
+        var getLocalDate = localStorage.getItem("date");
+        var getLocalTime = localStorage.getItem("time");
+        var getLocalCategory1 = localStorage.getItem("category1");
+        var getLocalStatus = localStorage.getItem("status");
+        var getLocalCusID = localStorage.getItem("Index")
+        var getLocalType1 = localStorage.getItem("type1");
+        var Last_BookID = localStorage.getItem("last_BookID");
+        var getLocal_Last_BookID = parseInt(Last_BookID) + 1;
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://172.26.252.97:8080/bookq?BookID=" + getLocal_Last_BookID + "&Date=" + getLocalDate + "&Time=" + getLocalTime + "&Detail=" + getLocalCategory1 + "&Status=" + getLocalStatus + "&CusID=" + getLocalCusID + "&Type=" + getLocalType1,
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "cache-control": "no-cache",
+                "Postman-Token": "8a9a2178-4caa-4638-9293-66d4c756fd1e"
+            },
+            "data": ""
+        }
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+        qq();
+
     }
     function selectq() {
         window.location.href = 'selectq.html'

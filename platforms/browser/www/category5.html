@@ -2,10 +2,12 @@
 <html lang="en">
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
-    <script src="cordova.js"></script>
+
 </head>
 <style>
     .bg {
@@ -30,7 +32,7 @@
         width: 380px;
         height: 75px;
         font-size: 29px;
-        font-weight:bold;
+        font-weight: bold;
     }
 
     .quick {
@@ -67,7 +69,7 @@
             <div class="bg">
                 <div class="bg1">
                     <div class="clearfix">
-                        <img class="quick" src="D:\Project\project\รูป\brackets.png">
+                        <img class="quick" src="img/brackets.png">
                         <br><br>
                         <div class="div">เทียนทัตนคลินิก</div>
 
@@ -75,31 +77,72 @@
                     <hr>
                     <br>
                     <br>
-                    <p style="text-align: center; margin-top: 10px;">
+                    <p style="text-align: center; margin-top: 10px;">เลือกใช้บริการ</p>
 
-                            เลือกใช้บริการทันตกรรมรักษารากฟัน</p>
-                          <br>
-                          <select class="select-input select-input--material" style="display: block;
+                    <input type="text" name="" id="type5" value="ทันตกรรมรากฟัน" disabled>
+
+                    <br>
+                    <select id="cate5" class="select-input select-input--material" style="display: block;
                           margin-left: auto;
-                          margin-right: auto;" >
-                                <option>ฟันหน้า</option>
-                                <option>ฟันกรามน้อย</option>
-                                <option>ฟันกรามใหญ่</option>
-                                <option>เกลารากฟัน</option>
-                                <option>รากฟันเทียม</option>
-                              </select>
+                          margin-right: auto;">
+                        <option>ฟันหน้า</option>
+                        <option>ฟันกรามน้อย</option>
+                        <option>ฟันกรามใหญ่</option>
+                        <option>เกลารากฟัน</option>
+                        <option>รากฟันเทียม</option>
+                    </select>
 
                 </div>
-                <ons-button style="background: SALMON;" modifier="large" onclick="qq()">จองคิว</ons-button>
+                <ons-button style="background: SALMON;" modifier="large" onclick="queue()">จองคิว</ons-button>
             </div>
         </ons-page>
 </body>
 <script>
     function qq() {
         window.location.href = 'qq.html'
-      }
-      function selectq() {
-    window.location.href = 'selectq.html'
-  }
-    </script>
+    }
+    function queue() {
+
+        var type_5 = document.getElementById("type5").value;
+        var type5 = localStorage.setItem('type5', type_5)
+
+        var cate_5 = document.getElementById("cate5").value;
+        var category = localStorage.setItem('category5', cate_5)
+
+
+        var status = localStorage.setItem('status', 1)
+
+        var getLocalDate = localStorage.getItem("date");
+        var getLocalTime = localStorage.getItem("time");
+        var getLocalCategory5 = localStorage.getItem("category5");
+        var getLocalStatus = localStorage.getItem("status");
+        var getLocalCusID = localStorage.getItem("Index")
+        var getLocalType5 = localStorage.getItem("type5");
+        var Last_BookID = localStorage.getItem("last_BookID");
+        var getLocal_Last_BookID = parseInt(Last_BookID) + 1;
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://172.26.252.97:8080/bookq?BookID=" + getLocal_Last_BookID + "&Date=" + getLocalDate + "&Time=" + getLocalTime + "&Detail=" + getLocalCategory5 + "&Status=" + getLocalStatus + "&CusID=" + getLocalCusID + "&Type=" + getLocalType5,
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "cache-control": "no-cache",
+                "Postman-Token": "8a9a2178-4caa-4638-9293-66d4c756fd1e"
+            },
+            "data": ""
+        }
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+        qq();
+
+    }
+    function selectq() {
+        window.location.href = 'selectq.html'
+    }
+</script>
+
 </html>

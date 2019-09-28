@@ -61,17 +61,23 @@
 
 
         //Create a Web Api url for getting a member info
-        var url = "http://localhost:8080/customer/";
-        var curl = url + cusnum;
-        console.log(curl);
+        var url = "http://172.26.252.97:8080/customer/";
+        var url = url + cusnum;
+        console.log(url);
+        window.onerror = function (msg, url, linenumber) {
+            alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
+            return true;
+        }
 
         //Get data from API
-        $.get(curl, function (data, status) {
+        $.get(url, function (data, status) {
 
             console.log(data);
             if(data.data.length > 0){
                 localStorage.setItem("Index",data.data[0].CusID)
+                console.log(data.data[0].CusID)
                 window.location.href = 'index.html'
+                
             }else{
 
                 window.location.href = 'login.html'

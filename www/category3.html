@@ -97,7 +97,7 @@
 </body>
 <script>
     function qq() {
-        window.location.href = 'qq.html'
+        window.location.href = 'confirm.html'
     }
     function queue() {
 
@@ -122,7 +122,7 @@
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://localhost:8080/bookq?BookID=" + getLocal_Last_BookID + "&Date=" + getLocalDate + "&Time=" + getLocalTime + "&Detail=" + getLocalCategory3 + "&Status=" + getLocalStatus + "&CusID=" + getLocalCusID + "&Type=" + getLocalType3,
+            "url": "http://172.26.252.97:8080/bookq?BookID=" + getLocal_Last_BookID + "&start=" + getLocalDate + "&Time=" + getLocalTime + "&Detail=" + getLocalCategory3 + "&Status=" + getLocalStatus + "&CusID=" + getLocalCusID + "&Type=" + getLocalType3+ "&end=" + getLocalDate,
             "method": "POST",
             "headers": {
                 "Content-Type": "application/x-www-form-urlencoded",
