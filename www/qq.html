@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
- 
+
 </head>
 <style>
     .bg {
@@ -13,7 +13,7 @@
         background-repeat: no-repeat;
         background-attachment: scroll;
         overflow: scroll;
-        height: 645px;
+        height: 700px;
     }
 
     .bg1 {
@@ -54,7 +54,7 @@
         float: left;
         width: 25px;
         height: 25px;
-        margin: 5px;
+        margin: 15px;
     }
 
     .clearfix {
@@ -74,7 +74,7 @@
         <ons-toolbar style="background-color:	LightCoral">
 
             <div class="left">
-                <ons-icon size="45px" onclick="index()" icon="angle-left">
+                <ons-icon size="45px" onclick="confirm()" icon="angle-left">
                 </ons-icon>
             </div>
         </ons-toolbar>
@@ -88,30 +88,22 @@
 
                     </div>
 
-                    <div class="text1">A007</div> <br><br><br>
+                    <div class="text1" id="order"></div> <br><br><br>
 
                     <ons-row>
                         <ons-col>
                             <div class="clearfix">
-
                                 <img class="quick1" src="img/tooth7.png"> <br>
-                                <div style="color: white">07 ก.พ. 62</div>
-
+                                <div style="color: white" id="date"></div>
                             </div>
-
-
-
                         </ons-col>
+
+
                         <ons-col>
-
-                            <div class="clearfix" style="margin-left: 90px">
-
+                            <div class="clearfix" style="margin-left:50px">
                                 <img class="quick1" src="img/medical.png"> <br>
-                                <div style="color: white">11:09:34</div>
-
+                                <div style="color: white" id="time"></div>
                             </div>
-
-
                         </ons-col>
                     </ons-row>
 
@@ -122,16 +114,133 @@
                     <div class="progress-bar progress-bar--material progress-bar--indeterminate">
                     </div>
                     <br><br>
-                    <div style="text-indent: 18px; text-align: center; font-size: 90px;color: RGB(0, 0, 0, 0.6);
-                            font-weight: bold;">6 คิว</div>
+                    <div id="numQ" style="text-indent: 15px; text-align: center; font-size: 90px;color: RGB(0, 0, 0, 0.6);
+                            font-weight: bold;"></div>
                     <br><br>
                     <br>
                     <div style="border-bottom:#999999 1.5px dotted;"></div><br>
-                    <p style="text-align: center; margin-top: 5px; color: RGB(0, 0, 0, 0.8); font-size: 18px" onclick="cancle()">ยกเลิกคิว</p>
+                    <ons-button style="background: SALMON;" modifier="large" onclick="cancle()">ยกเลิกคิว</ons-button>
+
                 </div>
 
+
             </div>
-          
+
+            <script>
+                var date = localStorage.getItem("date"); //เก็บวันที่
+                var time = localStorage.getItem("time"); //เก็บเวลา
+
+
+                console.log("Date::" + date);
+                console.log("time::" + time);
+
+
+                document.getElementById("date").innerHTML = date; //แสดงวันที่
+                document.getElementById("time").innerHTML = time; //แสดงเวลา
+
+                var arrOrderMF = ["A001", "A002", "A003", "A004", "A005"];
+                var arrOrderSS = ["A001", "A002", "A003", "A004", "A005",
+                    "A006", "A007", "A008", "A009", "A010"];
+
+                var day = localStorage.getItem("day")
+                if (day == "Sun" || day == "Sat") {
+                    console.log(arrOrderSS);
+                    var timeSS1;
+                    var timeSS2;
+                    var numQ;
+                    var time2 = localStorage.getItem("time");
+                    switch (time2) {
+                        case time2 = "9:00-9:45":
+                            timeSS2 = "A001";
+                            numQ = "คิวแรก";
+                            break;
+                        case time2 = "9:45-10:30":
+
+                            timeSS2 = "A002";
+                            numQ = "1 คิว";
+                            break;
+                        case time2 = "10:30-11:15":
+
+                            timeSS2 = "A003";
+                            numQ = "2 คิว";
+                            break;
+                        case time2 = "11:15-12:00":
+
+                            timeSS2 = "A004";
+                            numQ = "3 คิว";
+                            break;
+                        case time2 = "13:00-13:45":
+
+                            timeSS2 = "A005";
+                            numQ = "4 คิว";
+                            break;
+                        case time2 = "13:45-14:30":
+
+                            timeSS2 = "A006";
+                            numQ = "5 คิว";
+                            break;
+                        case time2 = "14:30-15:15":
+
+                            timeSS2 = "A007";
+                            numQ = "6 คิว";
+                            break;
+                        case time2 = "15:15-16:00":
+
+                            timeSS2 = "A008";
+                            numQ = "7 คิว";
+                            break;
+                        case time2 = "16:00-16:45":
+
+                            timeSS2 = "A009";
+                            numQ = "8 คิว";
+                            break;
+                        case time2 = "16:45-17:30":
+
+                            timeSS2 = "A010";
+                            numQ = "9 คิว";
+
+                    }
+
+                    document.getElementById("order").innerHTML = timeSS2;
+                    document.getElementById("numQ").innerHTML = numQ;
+
+                } else {
+                    console.log(arrOrderMF);
+                    var timeSS1;
+                    var timeSS2;
+                    var numQ;
+                    var time2 = localStorage.getItem("time");
+                    switch (time2) {
+                        case time2 = "17:00-17:45":
+                            timeSS2 = "A001";
+                            numQ = "คิวแรก";
+                            break;
+                        case time2 = "17:45-18:30":
+
+                            timeSS2 = "A002";
+                            numQ = "1 คิว";
+                            break;
+                        case time2 = "18:30-19:15":
+
+                            timeSS2 = "A003";
+                            numQ = "2 คิว";
+                            break;
+                        case time2 = "19:15-20:00":
+                            timeSS2 = "A004";
+                            numQ = "3 คิว";
+                            break;
+                        case time2 = "20:00-20:45":
+                            timeSS2 = "A005";
+                            numQ = "4 คิว";
+
+
+                    }
+                }
+
+                document.getElementById("order").innerHTML = timeSS2;
+                document.getElementById("numQ").innerHTML = numQ;
+            </script>
+
         </ons-page>
 
 
@@ -140,10 +249,16 @@
 
 
 </body>
+
 <script>
-    function index() {
-        window.location.href = 'index.html'
-    }
+
+
+
+
+</script>
+
+<script>
+
     function confirm() {
         window.location.href = 'confirm.html'
     }
