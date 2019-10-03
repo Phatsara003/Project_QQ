@@ -57,11 +57,11 @@
 
 
 
-            <img class="list-item__thumbnail" src="img/tooth8.png">
+            
 
 
             <div style="margin-left: 80%">
-                <img class="list-item__thumbnail" onclick="chatbot()" src="img/conversation.png">
+                <img class="list-item__thumbnail" src="img/tooth8.png">
             </div>
         </ons-toolbar>
 
@@ -99,15 +99,13 @@
                     <ons-col
                         style="background:white; border-radius: 15px; display: block; margin-left: auto;margin-right: auto;"
                         width="40" height="40">
-
                         <p>
                             <div>
-
-                                <img class="img" onclick="calendar()" src="img/calendar.png">
+                                <img class=" img" onclick="dating()" src="img/dental.png">
                             </div>
                         </p>
                         <p style="text-align: center; margin: 10px;">
-                            ปฏิทินหมอ
+                            ใบนัดหมอ
                         </p>
                     </ons-col>
                     <br>
@@ -129,15 +127,18 @@
                     <ons-col
                         style="background:white; border-radius: 15px; display: block; margin-left: auto;margin-right: auto;"
                         width="40" height="40">
+
                         <p>
                             <div>
-                                <img class=" img" onclick="dating()" src="img/dental.png">
+
+                                <img class="img" onclick="chatbot1()" src="img/conversation.png">
                             </div>
                         </p>
                         <p style="text-align: center; margin: 10px;">
-                            ใบนัดหมอ
+                            สอบถาม
                         </p>
                     </ons-col>
+                   
                     <ons-col
                         style="background:white; border-radius: 15px; display: block; margin-left: auto;margin-right: auto;"
                         width="40" height="40">
@@ -185,9 +186,9 @@
         for (let i = 0; i < loopBookq.length; i++) {
             if ( i< loopBookq.length  ) {
              //console.log(" Loop_BookId : "+i+"::"+ loopBookq[i].BookID );
-             console.log(" Loop_Date : " + loopBookq[i].Date + "::" + loopBookq[i].Time);
-                if ("date"==loopBookq[i].Date ) {
-                    console.log("testDate::"+loopBookq[i].Date+"::"+loopBookq[i].Time);
+             console.log(" Loop_Date : " + loopBookq[i].start + "::" + loopBookq[i].Time);
+                if ("date"==loopBookq[i].start ) {
+                    console.log("testDate::"+loopBookq[i].start+"::"+loopBookq[i].Time);
                     
                 }
             }
@@ -236,8 +237,8 @@
 
 
 <script>
-    function chatbot() {
-        window.location.href = 'chatbot.html'
+    function chatbot1() {
+        window.location.href = 'chatbot1.html'
     }
     function selectdatetime() {
         window.location.href = 'selectdate.html'

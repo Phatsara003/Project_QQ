@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
@@ -119,7 +121,9 @@
                     <br><br>
                     <br>
                     <div style="border-bottom:#999999 1.5px dotted;"></div><br>
-                    <ons-button style="background: SALMON;" modifier="large" onclick="cancle()">ยกเลิกคิว</ons-button>
+
+                   
+                    <ons-button style="background: SALMON;" modifier="large" onclick="createAlertDialog()">ยกเลิกคิว</ons-button>
 
                 </div>
 
@@ -239,8 +243,76 @@
 
                 document.getElementById("order").innerHTML = timeSS2;
                 document.getElementById("numQ").innerHTML = numQ;
-            </script>
 
+                var index = localStorage.getItem("Index");
+               
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://172.26.252.97:8080/bookq",
+                    "method": "GET",
+                    "headers": {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "cache-control": "no-cache",
+                        "Postman-Token": "245e85de-d347-4c15-9061-ffe63ea8c51c"
+                    }
+                }
+
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+                    let loop = response.data;
+                    
+                   
+                    for (let j = 0; j < loop.length; j++) {
+
+                        if (index == loop[j].CusID && time == loop[j].Time && date == loop[j].start) {
+                            console.log(" LoopBook123: " + loop[j].BookID);
+                            localStorage.setItem('bookID',loop[j].BookID);
+                          
+                        }
+                    }
+
+                });
+        function cencelBookq() {
+           var bookid = localStorage.getItem("bookID");
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "http://172.26.252.97:8080/bookq/" + bookid,
+                "method": "DELETE",
+                "headers": {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "cache-control": "no-cache",
+                    "Postman-Token": "21e3580e-c748-47b9-9ef8-e092352e4d76"
+                }
+            }
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
+            gotoindex();
+        }
+
+function gotoindex() {
+
+        window.location.href = 'index.html'
+    }
+            </script>
+<template id="alert-dialog.html">
+ <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+        <div class="clearfix" style="margin-left: 100px">
+                    <img src="img/crying.png" style="width: 60px; height: 60px;"> <br>
+                </div>
+        <div class="alert-dialog-content">
+         คุณต้องการยกเลิกคิวใช่ไหม ? 
+
+        </div>
+        <div class="alert-dialog-footer">
+          <ons-alert-dialog-button style="color:blue" onclick="hideAlertDialog()">ปิด</ons-alert-dialog-button>
+          <ons-alert-dialog-button style="color:red" onclick="cencelBookq()">ยืนยันการยกเลิก</ons-alert-dialog-button>
+        </div>
+      </ons-alert-dialog>
+    </template>
         </ons-page>
 
 
@@ -250,21 +322,35 @@
 
 </body>
 
-<script>
 
-
-
-
-</script>
 
 <script>
+var createAlertDialog = function() {
+  var dialog = document.getElementById('my-alert-dialog');
 
-    function confirm() {
-        window.location.href = 'confirm.html'
-    }
-    function cancle() {
-        window.location.href = 'cancle.html'
-    }
+  if (dialog) {
+    dialog.show();
+  } else {
+    ons.createElement('alert-dialog.html', { append: true })
+      .then(function(dialog) {
+        dialog.show();
+      });
+  }
+};
+
+var hideAlertDialog = function() {
+  document
+    .getElementById('my-alert-dialog')
+    .hide();
+};
+
+
+    // function confirm() {
+    //     window.location.href = 'confirm.html'
+    // }
+    // function cancle() {
+    //     window.location.href = 'cancle.html'
+    // }
 </script>
 
 </html>

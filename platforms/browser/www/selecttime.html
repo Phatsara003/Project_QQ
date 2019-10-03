@@ -17,6 +17,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </head>
 <style>
@@ -82,6 +83,7 @@
             </div>
         </ons-toolbar>
         <ons-page>
+
             <div class="bg">
                 <div class="bg1">
                     <div class="clearfix">
@@ -94,127 +96,133 @@
                     <br>
                     <div class="container">
                         <p>กรุณาเลือกเวลา</p>
+                        <div>
+                            <select id="show" class='mdb-select md-form'></select>
+                        </div>
                     </div>
-                    <div class="container">
 
+                    <div class="container">
 
                         <body>
 
-                            <!-- <select id="time" class="mdb-select md-form">
-                                <option value="" disabled selected>เลือก</option>
-                                <option value="9:45-10:30" >9:00-9:45</option>
-                                <option value="9:45-10:30" >9:45-10:30</option>
-                                <option value="10:30-11:15" >10:30-11:15</option>
-                                <option value="11:15-12:00" >11:15-12:00</option>
-                                <option value="13:00-13:45" >13:00-13:45</option>
-                                <option value="13:45-14:30" >13:45-14:30</option>
-                                <option value="14:30-15:15" >14:30-15:15</option>
-                                <option value="15:15-16:00" >15:15-16:00</option>
-                                <option value="16:00-16:45" >16:00-16:45</option>
-                                <option value="16:45-17:30" >16:45-17:30</option>
-                              </select>
-                             <select id="time" class="mdb-select md-form">
-                                <option value="" disabled selected>เลือก</option>
-                                <option value="17:00-17:45" >17:00-17:45</option>
-                                <option value="17:45-18:30" >17:45-18:30</option>
-                                <option value="18:30-19:15" >18:30-19:15</option>
-                                <option value="19:15-20:00" >19:15-20:00</option>
-                             </select>   -->
 
-                            <script>
-                                var html = "";
-                                var day = localStorage.getItem("day")
-                                if (day == "Sun" || day == "Sat") {
-                                    document.write("<select id='time' class='mdb-select md-form'>");
-                                    document.write("<option value='' disabled selected>เลือก</option>");
-                                    document.write("<option value='9:00-9:45' >9:00-9:45</option>");
-                                    document.write("<option value='9:45-10:30' >9:45-10:30</option>");
-                                    document.write("<option value='10:30-11:15' >10:30-11:15</option>");
-                                    document.write("<option value='11:15-12:00' >11:15-12:00</option>");
-                                    document.write("<option value='13:00-13:45' >13:00-13:45</option>");
-                                    document.write("<option value='13:45-14:30' >13:45-14:30</option>");
-                                    document.write("<option value='14:30-15:15' >14:30-15:15</option>");
-                                    document.write("<option value='15:15-16:00' >15:15-16:00</option>");
-                                    document.write("<option value='16:00-16:45' >16:00-16:45</option>");
-                                    document.write("<option value='16:45-17:30' >16:45-17:30</option>");
-                                    document.write("</select>");
+                            <script> /// เก็บเวลาไว้ในlocal
+
+                                function getTime() {
+                                    var time_1 = document.getElementById("show").value;
+                                    var time = localStorage.setItem('time', time_1)
+                                    var getLocalTime = localStorage.getItem("time");
+                                    console.log("LocalTime::" + getLocalTime);
+                                }
+
+                                createOptions();
+
+                                function createOptions() {
+                                    var arrTimeMF = ["17:00-17:45", "17:45-18:30", "18:30-19:15", "19:15-20:00", "20:00-20:45"];
+                                    var arrTimeSS = ["9:00-9:45", "9:45-10:30", "10:30-11:15", "11:15-12:00", "13:00-13:45","13:45-14:30", "14:30-15:15", "15:15-16:00", "16:00-16:45", "16:45-17:30"]
+                                    var index = localStorage.getItem("Index");
+                                    var getLocalDate = localStorage.getItem("date");
+                                    var forDeletion = [];
+                                    var arrAfterDel = [];
+
+                                    ////ดึงข้อมูจากดาต้าเบส
+                                    var settings1 = {
+                                        "async": true,
+                                        "crossDomain": true,
+                                        "url": "http://172.26.252.97:8080/bookq/",
+                                        "method": "GET",
+                                        "headers": {
+                                            "cache-control": "no-cache",
+                                            "Postman-Token": "4d85d90c-90d7-48a1-bac6-a19b0c736293"
+                                        }
+                                    }
+
+                                    $.ajax(settings1).done(function (response) {
+                                        let loopBookq = response.data;
+
+                                        console.log("loop bookID: " + loopBookq.length);
+
+                                        for (let i = 0; i < loopBookq.length; i++) {
+                                            if (i < loopBookq.length) {
+                                                console.log(" Loop_BookId : "+i+"::"+ loopBookq[i].BookID );
+
+                                                if (getLocalDate == loopBookq[i].start) {
+                                                    console.log("testDate::" + loopBookq[i].start); //วันที่
+                                                    console.log("testTime:: " + i + "::" + loopBookq[i].Time); //เวลา
 
 
-                                } else {
+                                                    forDeletion.push(loopBookq[i].Time);
+                                                    
+                                                }
 
-                                    document.write("<select id='time' class='mdb-select md-form'>");
-                                    document.write("<option value='' disabled selected>เลือก</option>");
-                                    document.write("<option value='17:00-17:45' >17:00-17:45</option>");
-                                    document.write("<option value='17:45-18:30' >17:45-18:30</option>");
-                                    document.write("<option value='18:30-19:15' >18:30-19:15</option>");
-                                    document.write("<option value='19:15-20:00' >19:15-20:00</option>");
-                                    document.write("</select>");
+                                            }
 
-                                    // document.write("<button value='10:30-11:15' >10:30-11:15</button>"); 
+                                            var x = i;
+                                        }
+                                        ///BookID ตัวล่าสุด
+                                        var last_bookId = localStorage.setItem('last_BookID', loopBookq[x].BookID)
+                                        var getLocal_Last_BookID = localStorage.getItem("last_BookID");
+                                        console.log("Local_Last_BookID::" + getLocal_Last_BookID); //ไอดีล่าสุด
+
+
+
+                                        ////เสาร์-อาทิตย์
+                                        var day = localStorage.getItem("day")
+                                        if (day == "Sun" || day == "Sat") {
+                                            document.getElementById("show").innerHTML += "<option value='' disabled selected>เลือก</option>";
+                                            console.log("เวลาที่ไม่ต้องแสดง :" + forDeletion);
+                                            console.log(arrTimeSS);
+                                            
+                                            /// คำสั่งลบของเสาร์-อาทิตย์ arrimeSS
+                                            arrAfterDel = arrTimeSS.filter(function (value, index, arr) {
+                                                if (!forDeletion.includes(value)) {
+                                                    return value;
+                                                }
+                                            })
+                                            for (let n = 0; n < arrAfterDel.length; n++) {
+                                
+                                                document.getElementById("show").innerHTML += "<option value=" + arrAfterDel[n] + ">" + arrAfterDel[n] + "</option>";
+                                            }
+
+
+
+
+                                            /// จันทร์-ศุกร์
+                                        } else {
+                                            document.getElementById("show").innerHTML += "<option value='' disabled selected>เลือก</option>";
+                                            console.log("เวลาที่ไม่ต้องแสดง :" + forDeletion);
+                                            console.log(arrTimeMF);
+                                            
+
+                                            ///คำสังลบของจันทร์-ศุกร์ arrimeMF
+                                            arrAfterDel = arrTimeMF.filter(function (value, index, arr) {
+                                                if (!forDeletion.includes(value)) {
+                                                    return value;
+
+                                                }
+
+                                            })
+                                            for (let n = 0; n < arrAfterDel.length; n++) {
+
+                                                document.getElementById("show").innerHTML += "<option value" + arrAfterDel[n] + ">" + arrAfterDel[n] + "</option>";
+                                                
+
+
+                                            }
+
+                                        }
+
+
+                                    });
+
 
 
 
                                 }
-
-
 
                             </script>
 
                         </body>
-                        <script>
-
-                            var index = localStorage.getItem("Index");
-                            var getLocalDate = localStorage.getItem("date");
-
-                            var settings1 = {
-                                "async": true,
-                                "crossDomain": true,
-                                "url": "http://172.26.252.97:8080/bookq/",
-                                "method": "GET",
-                                "headers": {
-                                    "cache-control": "no-cache",
-                                    "Postman-Token": "4d85d90c-90d7-48a1-bac6-a19b0c736293"
-                                }
-                            }
-
-                            $.ajax(settings1).done(function (response) {
-                                let loopBookq = response.data;
-
-                                console.log("loop bookID: " + loopBookq.length);
-                                   var arrTime =["17:00-17:45","17:45-18:30","18:30-19:15","19:15-20:00"];
-                                   
-                                    
-                                for (let i = 0; i < loopBookq.length; i++) {
-                                    if (i < loopBookq.length) {
-                                        //console.log(" Loop_BookId : "+i+"::"+ loopBookq[i].BookID );
-                                        
-                                        if (getLocalDate == loopBookq[i].Date ) {
-                                            console.log("testDate::" + loopBookq[i].Date );
-                                               console.log("testTime:: "+i+"::"+loopBookq[i].Time);           
-                                               
-                                             
-                                        }
-                                        
-                                    }
-                                    var x = i;
-                                }
-                                var last_bookId = localStorage.setItem('last_BookID', loopBookq[x].BookID)
-                                var getLocal_Last_BookID = localStorage.getItem("last_BookID");
-                                console.log("Local_Last_BookID::" + getLocal_Last_BookID);
-                            });
-
-
-
-                            function getTime() {
-                                var time_1 = document.getElementById("time").value;
-
-
-                                var time = localStorage.setItem('time', time_1)
-                                var getLocalTime = localStorage.getItem("time");
-                                console.log("LocalTime::" + getLocalTime);
-                            }
-
-                        </script>
 
                     </div>
                     <br>
