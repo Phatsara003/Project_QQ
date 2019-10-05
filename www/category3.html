@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
@@ -79,7 +80,7 @@
                     <br>
                     <p style="text-align: center; margin-top: 10px;">เลือกใช้บริการ</p>
 
-                    <input type="text" name="" id="type3" value="ทันตกรรมโรคเหงือก" disabled>
+                    <input class="form-control" style="text-align: center;" type="text" name="" id="type3" value="ทันตกรรมโรคเหงือก" disabled>
 
                     <br>
                     <select id="cate3" class="select-input select-input--material" style="display: block;
@@ -108,7 +109,7 @@
         var category = localStorage.setItem('category3', cate_3)
 
 
-        var status = localStorage.setItem('status', 1)
+        var status = localStorage.setItem('status', 0)
 
         var getLocalDate = localStorage.getItem("date");
         var getLocalTime = localStorage.getItem("time");
@@ -116,13 +117,13 @@
         var getLocalStatus = localStorage.getItem("status");
         var getLocalCusID = localStorage.getItem("Index")
         var getLocalType3 = localStorage.getItem("type3");
-        var Last_BookID = localStorage.getItem("last_BookID");
-        var getLocal_Last_BookID = parseInt(Last_BookID) + 1;
+        // var Last_BookID = localStorage.getItem("last_BookID");
+        // var getLocal_Last_BookID = parseInt(Last_BookID) + 1;
 
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://172.26.252.97:8080/bookq?BookID=" + getLocal_Last_BookID + "&start=" + getLocalDate + "&Time=" + getLocalTime + "&Detail=" + getLocalCategory3 + "&Status=" + getLocalStatus + "&CusID=" + getLocalCusID + "&Type=" + getLocalType3+ "&end=" + getLocalDate,
+            "url": "http://172.26.252.97:8080/bookq?BookID=" + null + "&start=" + getLocalDate + "&Time=" + getLocalTime + "&Detail=" + getLocalCategory3 + "&Status=" + getLocalStatus + "&CusID=" + getLocalCusID + "&Type=" + getLocalType3+ "&end=" + getLocalDate,
             "method": "POST",
             "headers": {
                 "Content-Type": "application/x-www-form-urlencoded",

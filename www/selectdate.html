@@ -20,10 +20,10 @@
 
 
 
- <!-- script Date jquery ui -->
-    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"rel = "stylesheet">
-    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <!-- script Date jquery ui -->
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
 
 
@@ -110,41 +110,36 @@
                         <body>
                             <br>
                             <input id="datepicker" width="250">
-                            
-                           <script>
+
+                            <script>
                                 var today = new Date();
                                 $('#datepicker').datepicker({
-                                    dateFormat:"D,dd/mm/yy", // แสดงวันด้วย DD คือวันอะไร จ-ศ 
-                                    // format: "dd/mm/yyyy",
+                                    dateFormat: "D,yy-mm-dd", // แสดงวันด้วย DD คือวันอะไร จ-ศ 
                                     minDate: today,
                                 });
-                           
-
                             </script>
 
-                            </script>
-
-                            <!-- 
-                                <script src="js/queue.js"></script> -->
                         </body>
                         <script>
                             function getDate() {
                                 var date = document.getElementById("datepicker").value;
-                                var day = date.substring(0,3);
 
+                             
+                                    var day = date.substring(0, 3);
+                                    console.log("date ::" + date);
+                                    // console.log("day ::" + day);
+                                    var date = localStorage.setItem('date', date)
+                                    var getLocalDate = localStorage.getItem("date");
+                                    var day = localStorage.setItem('day', day)
+                                    var getLocalDay = localStorage.getItem("day");
+                                    console.log("LocalDate::" + getLocalDate);
 
-                                console.log("date ::" + date);
-                                // console.log("day ::" + day);
-                                var date = localStorage.setItem('date', date)
-                                var getLocalDate = localStorage.getItem("date");
-                                var day = localStorage.setItem('day', day)
-                                var getLocalDay = localStorage.getItem("day");
-                                console.log("LocalDate::" + getLocalDate);
+                               
 
                             }
                         </script>
 
-                        </script>
+
                     </div>
                     <br>
                     <form>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
-    
+
 </head>
 <style>
     .bg {
@@ -22,7 +22,7 @@
         border-radius: 30px;
         display: block;
         margin: 15px;
-        height: 660px;
+        height: auto;
 
     }
 
@@ -72,42 +72,36 @@
                         <img class="quick" src="img/brackets.png">
                         <br><br>
                         <div class="div">เทียนทัตนคลินิก</div>
-                        
+
                         <p>รายการนัดของฉัน</p>
-                        <b id="nameSh"></b>
+                        <center>
+                            <b id="namehis"></b>
+                        </center>
 
                     </div>
                     <hr>
-                    <ons-row>
-                        <ons-col style="background:white; border-radius: 10px; display: block; margin: 10px;">
-
-                            <div class="clearfix">
-                                <p><img class="quick" src="img/tooth7.png" width="50" height="50">
-                                    <b id="appointment"></b></p>
-
-                            </div>
+                    <div id="show"></div>
 
 
 
-
-                        </ons-col>
-                    </ons-row>
                 </div>
             </div>
         </ons-page>
 </body>
+</ons-page>
+</body>
 
 <script>
     var index = localStorage.getItem("Index");
-
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://localhost:8080/appointment",
+        "url": "http://192.168.43.235:8080/bookq",
         "method": "GET",
         "headers": {
+            "Content-Type": "application/x-www-form-urlencoded",
             "cache-control": "no-cache",
-            "Postman-Token": "11c0cc25-3d31-4dd0-b667-82a94a6cd2a6"
+            "Postman-Token": "245e85de-d347-4c15-9061-ffe63ea8c51c"
         }
     }
 
@@ -115,31 +109,66 @@
         console.log(response);
         let loop = response.data;
         // console.log(loop.length);
-        $("#appointment").html("วันที่ : " + loop[0].Date + '<br>' + "เวลา : " + loop[0].Time + '<br>' + "รายละเอียด : " + loop[0].Detail);
+        var html ="";
+        for (let j = 0; j < loop.length; j++) {
+
+            if (getItemCus == loop[j].CusID) {
+                console.log(" Loop_Fname 1: " + loop[j].BookID);
+
+                    $('#show').append(
+                        '<ons-row >'+
+                       '<ons-col style="background:white; border-radius: 10px; display: block; margin: 10px;">'+
+                            '<div id="displaybox"></div>'+
+                            '<div class="clearfix">'+
+                                '<p><img class="quick" src="img/health-report.png" width="50"'+
+                                        'height="50">'+
+                                     "วันที่ : " + loop[j].start + '<br>' + "ประเภท : " + loop[j].Type + '<br>' + "รายละเอียด : " + loop[j].Detail + '</p>'+
+                            '</div>'+
+                        '</ons-col>'+
+                    '</ons-row>'
+                    )
+                               
+            }
+        }
+
     });
-    
+
+
     var settings1 = {
         "async": true,
         "crossDomain": true,
-        "url": "http://localhost:8080/Admin/"+index,
+        "url": "http://192.168.43.235:8080/customer",
         "method": "GET",
         "headers": {
+            "Content-Type": "application/x-www-form-urlencoded",
             "cache-control": "no-cache",
-            "Postman-Token": "8b1e6897-60c3-48a2-bc32-810a3697e00a"
+            "Postman-Token": "7ce21012-571f-46f2-b635-45e9610ecc35"
         }
     }
-
+    var getItemCus = localStorage.getItem("Index");
+    console.log(getItemCus);
     $.ajax(settings1).done(function (response) {
         console.log(response);
-        let loop = response.data;
-        // console.log(loop.length);
-        $("#nameSh").html("คุณ : "+loop[0].Fname);
+        let loopCus = response.data;
+
+        for (let i = 0; i < loopCus.length; i++) {
+
+            console.log(" Loop_Fname 1: " + loopCus[i].Fname);
+
+            if (getItemCus == loopCus[i].CusID) {
+
+                $("#namehis").html("คุณ   " + loopCus[i].Fname);
+                console.log("indexHis: " + getItemCus);
+                console.log("Fname 1: " + loopCus[i].Fname);
+            }
+        }
     });
 
 </script>
+</script>
 <script>
     function index() {
-        window.location.href = 'index.html'
+        window.location.href = 'home.html'
     }
 </script>
 

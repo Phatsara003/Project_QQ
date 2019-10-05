@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
@@ -79,7 +80,7 @@
                     <br>
                     <p style="text-align: center; margin-top: 10px;">เลือกใช้บริการ</p>
 
-                    <input type="text" name="" id="type5" value="ทันตกรรมรากฟัน" disabled>
+                    <input class="form-control" style="text-align: center;" type="text" name="" id="type5" value="ทันตกรรมรากฟัน" disabled>
 
                     <br>
                     <select id="cate5" class="select-input select-input--material" style="display: block;
@@ -124,7 +125,7 @@
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://172.26.252.97:8080/bookq?BookID=" + getLocal_Last_BookID + "&start=" + getLocalDate + "&Time=" + getLocalTime + "&Detail=" + getLocalCategory5 + "&Status=" + getLocalStatus + "&CusID=" + getLocalCusID + "&Type=" + getLocalType5+ "&end=" + getLocalDate,
+            "url": "http://192.168.137.158:8080/bookq?BookID=" + getLocal_Last_BookID + "&start=" + getLocalDate + "&Time=" + getLocalTime + "&Detail=" + getLocalCategory5 + "&Status=" + getLocalStatus + "&CusID=" + getLocalCusID + "&Type=" + getLocalType5+ "&end=" + getLocalDate,
             "method": "POST",
             "headers": {
                 "Content-Type": "application/x-www-form-urlencoded",

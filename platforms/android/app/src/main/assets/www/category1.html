@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
@@ -54,6 +55,7 @@
         height: 95px;
 
     }
+    
 </style>
 
 <body>
@@ -79,7 +81,11 @@
                     <br>
                     <p style="text-align: center; margin-top: 10px;">เลือกใช้บริการ</p>
                     <!-- <p  style="text-align: center; margin-top: 10px;" id="type" value="ทันตกรรมพื้นฐาน">ทันตกรรมพื้นฐาน</p> -->
-                    <input type="text" name="" id="type1" value="ทันตกรรมพื้นฐาน" disabled>
+
+                   
+                        <input class="form-control" style="text-align: center;"  type="text" name="" id="type1" value="ทันตกรรมพื้นฐาน"
+                            disabled></input>
+                    
 
                     <br>
 
@@ -103,7 +109,7 @@
 </body>
 <script>
     function qq() {
-        window.location.href = 'qq.html'
+        window.location.href = 'confirm.html'
 
     }
 
@@ -127,7 +133,7 @@
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://192.168.43.235:8080/bookq?BookID=" + getLocal_Last_BookID + "&Date=" + getLocalDate + "&Time=" + getLocalTime + "&Detail=" + getLocalCategory1 + "&Status=" + getLocalStatus + "&CusID=" + getLocalCusID + "&Type=" + getLocalType1,
+            "url": "http://192.168.43.235:8080/bookq?BookID=" + getLocal_Last_BookID + "&start=" + getLocalDate + "&Time=" + getLocalTime + "&Detail=" + getLocalCategory1 + "&Status=" + getLocalStatus + "&CusID=" + getLocalCusID + "&Type=" + getLocalType1 + "&end=" + getLocalDate,
             "method": "POST",
             "headers": {
                 "Content-Type": "application/x-www-form-urlencoded",
